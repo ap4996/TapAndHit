@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
     public Transform target;
 
     private Vector3 characterScaleForMovingRight, characterScaleForMovingLeft;
+    private bool canThrowBall;
+
 
     private void Awake()
     {
         characterScaleForMovingRight = transform.localScale;
         characterScaleForMovingLeft = new Vector3(-characterScaleForMovingRight.x, characterScaleForMovingRight.y, characterScaleForMovingRight.z);
+        canThrowBall = true;
     }
 
     private void Update()
@@ -48,17 +49,22 @@ public class PlayerMovement : MonoBehaviour
     {
         character.transform.localScale = characterScaleForMovingRight;
         character.AddForce(Vector2.right * movementPower);
+        canThrowBall = true;
     }
 
     private void MakeCharacterMoveLeft()
     {
         character.transform.localScale = characterScaleForMovingLeft;
         character.AddForce(Vector2.left * movementPower);
+        canThrowBall = false;
     }
 
     private void GenerateBallAndThrowOnTarget()
     {
-        GameObject ball = Instantiate(ballPrefab, character.position, Quaternion.identity) as GameObject;
-        ball.GetComponent<Rigidbody2D>().AddForce(throwPower * target.position);
+        if (canThrowBall)
+        {
+            GameObject ball = Instantiate(ballPrefab, character.position, Quaternion.identity) as GameObject;
+            ball.GetComponent<Rigidbody2D>().AddForce(throwPower * Vector3.right);
+        }
     }
 }

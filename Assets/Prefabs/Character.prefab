@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d012577b23e89488440cd275778fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 250
+  jumpPower: 450
   movementPower: 100
-  throwPower: 250
+  throwPower: 600
   character: {fileID: 779164649278735037}
   animator: {fileID: 6291311025978980782}
   ballPrefab: {fileID: 2545201259171203421, guid: 72b4aaa9b16c7814f990405f1866db9a,
